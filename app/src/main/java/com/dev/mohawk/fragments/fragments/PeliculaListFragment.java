@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.dev.mohawk.fragments.R;
@@ -17,6 +18,7 @@ import com.dev.mohawk.fragments.items.Pelicula;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 public class PeliculaListFragment extends Fragment {
 
@@ -41,17 +43,27 @@ public class PeliculaListFragment extends Fragment {
 
 	    Pelicula[] datos;
 	    datos = new Pelicula[]{
-	    		new Pelicula()
+	    		new Pelicula( getContext() )
 					    .setTitulo( "Avengers: Infinity War" )
-					    .setCover( getContext().getDrawable( R.mipmap.ic_infinity ) )
+					    .setCover( R.mipmap.ic_infinity )
 					    .setResumen( "The Avengers and their allies must be willing to " +
 					    "sacrifice all in an attempt to defeat the powerful Thanos before his blitz of " +
 					    "devastation and ruin puts an end to the universe." )
 					    .setActores( new String[]{ "Robert Downey Jr", "Chris Hemsworth" }  )
+					    .setFecha( new Date( 2018, 2, 20 ) )
+			            .setIdioma( "Español" )
 	    };
 	    PeliculaAdapter ad = new PeliculaAdapter( getContext(), datos );
 
 	    l.setAdapter( ad );
+	    l.setOnItemClickListener( new AdapterView.OnItemClickListener() {
+		    @Override
+		    public void onItemClick( AdapterView<?> parent, View view, int position, long id ) {
+			   if( listener != null )
+				   listener.itemSelected( ( Pelicula ) l.getAdapter().getItem( position ) );
+		    }
+	    } );
+
     }
 
     public interface ItemSelectedListener{

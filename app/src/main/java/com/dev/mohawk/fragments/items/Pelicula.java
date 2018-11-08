@@ -1,6 +1,9 @@
 package com.dev.mohawk.fragments.items;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,8 +15,11 @@ public class Pelicula {
     private Date fecha;
     private String idioma;
     private String[] actores;
+    private int img_id;
+    private Context c;
 
-    public Pelicula() {
+    public Pelicula( Context context ) {
+        c = context;
     }
 
     public String getTitulo() {
@@ -38,13 +44,19 @@ public class Pelicula {
         return cover;
     }
 
-    public Pelicula setCover(Drawable cover) {
-        this.cover = cover;
+    public int getImg_id() {
+        return img_id;
+    }
+
+    @RequiresApi( api = Build.VERSION_CODES.LOLLIPOP )
+    public Pelicula setCover( int img_id ) {
+        this.img_id = img_id;
+        this.cover = c.getDrawable( img_id );
         return this;
     }
 
     public String getFecha() {
-        SimpleDateFormat d = new SimpleDateFormat( "dd MMMM yyyy" );
+        SimpleDateFormat d = new SimpleDateFormat( "dd/mm/yy" );
         return d.format( this.fecha );
     }
 
@@ -69,5 +81,9 @@ public class Pelicula {
     public Pelicula setActores( String[] actores) {
         this.actores = actores;
         return this;
+    }
+
+    public String[] getInfo(){
+        return  new String[]{ getTitulo(), getResumen() , getFecha(), getIdioma() };
     }
 }
