@@ -3,11 +3,15 @@ package com.dev.mohawk.fragments;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.dev.mohawk.fragments.fragments.PeliculaListFragment;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        PeliculaListFragment f = ( PeliculaListFragment ) getSupportFragmentManager().findFragmentById( R.id.main );
     }
 }

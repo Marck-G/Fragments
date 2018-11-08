@@ -3,7 +3,6 @@ package com.dev.mohawk.fragments.items;
 import android.graphics.drawable.Drawable;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 public class Pelicula {
@@ -12,7 +11,7 @@ public class Pelicula {
     private Drawable cover;
     private Date fecha;
     private String idioma;
-    private ArrayList<String> actores;
+    private String[] actores;
 
     public Pelicula() {
     }
@@ -63,11 +62,11 @@ public class Pelicula {
         return this;
     }
 
-    public ArrayList<String> getActores() {
+    public String[] getActores() {
         return actores;
     }
 
-    public Pelicula setActores(ArrayList<String> actores) {
+    public Pelicula setActores( String[] actores) {
         this.actores = actores;
         return this;
     }
